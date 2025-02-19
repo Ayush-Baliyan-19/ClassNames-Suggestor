@@ -1,65 +1,40 @@
-# css-suggestor README
+# CSS Suggestor - VS Code Extension
 
-This is the README for your extension "css-suggestor". After writing up a brief description, we recommend including the following sections.
+CSS Suggestor is a VS Code extension that provides intelligent autocomplete suggestions for CSS classes based on the CSS package used in your project. By default, it scans `@groww-tech/mint-css`, but you can update it to any package of your choice.
 
 ## Features
+- **Auto-suggest CSS classes** in `class` and `className` attributes.
+- **Fetches CSS classes dynamically** from installed NPM packages.
+- **Supports multiple languages**, including HTML, JavaScript, TypeScript, React (JSX/TSX).
+- **Displays CSS properties** of suggested classes in the autocomplete popup.
+- **Change the CSS package dynamically** using a command.
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+## Usage
+### Autocomplete Suggestions
+The extension suggests CSS classes inside:
+```html
+<div class="contentPrimary"></div>
+```
+### Change CSS Package
+You can change the default package (`@groww-tech/mint-css`) by running the command:
+1. Open the Command Palette (`Ctrl+Shift+P` / `Cmd+Shift+P` on Mac).
+2. Search for `CSS Suggestor: Set Package`.
+3. Enter the NPM package name containing your CSS classes.
 
-For example if there is an image subfolder under your extension project workspace:
+## How It Works
+1. The extension scans `node_modules` to find the CSS file inside the given package.
+2. It extracts CSS class definitions and stores them in memory.
+3. It provides autocomplete suggestions with class names and their respective styles.
 
-\!\[feature X\]\(images/feature-x.png\)
+## Supported File Types
+- `.html`
+- `.js`, `.jsx`
+- `.ts`, `.tsx`
 
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
+## Future Enhancements
+- Support for Tailwind-like class prefix matching.
+- Option to reload CSS classes manually.
+- Color previews for background/text-color classes.
 
-## Requirements
-
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
-
-## Extension Settings
-
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
-
-For example:
-
-This extension contributes the following settings:
-
-* `myExtension.enable`: Enable/disable this extension.
-* `myExtension.thing`: Set to `blah` to do something.
-
-## Known Issues
-
-Calling out known issues can help limit users opening duplicate issues against your extension.
-
-## Release Notes
-
-Users appreciate release notes as you update your extension.
-
-### 1.0.0
-
-Initial release of ...
-
-### 1.0.1
-
-Fixed issue #.
-
-### 1.1.0
-
-Added features X, Y, and Z.
-
----
-
-## Working with Markdown
-
-You can author your README using Visual Studio Code.  Here are some useful editor keyboard shortcuts:
-
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux)
-* Toggle preview (`Shift+Cmd+V` on macOS or `Shift+Ctrl+V` on Windows and Linux)
-* Press `Ctrl+Space` (Windows, Linux, macOS) to see a list of Markdown snippets
-
-## For more information
-
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
-
-**Enjoy!**
+## License
+This project is licensed under the MIT License.

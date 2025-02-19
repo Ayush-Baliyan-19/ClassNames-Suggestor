@@ -76,18 +76,18 @@ async function activate(context) {
     const definitions = new Map();
     const classRegex = /\.([a-zA-Z0-9_-]+)\s*\{([^}]*)\}/g;
     let match;
-  
+
     while ((match = classRegex.exec(cssContent)) !== null) {
       const className = match[1];
       let properties = match[2].trim();
-  
+
       if (className && properties) {
         // Add line breaks after each semicolon
-        properties = properties.replace(/;/g, ';\n');
+        properties = properties.replace(/;/g, ";\n");
         definitions.set(className, properties);
       }
     }
-  
+
     return definitions;
   }
 
@@ -122,65 +122,71 @@ async function activate(context) {
     ],
     {
       provideCompletionItems(document, position) {
-        const linePrefix = document.lineAt(position).text.slice(0, position.character);
+        const linePrefix = document
+          .lineAt(position)
+          .text.slice(0, position.character);
 
         // Check for className or class attributes
         const isClassName = /class(Name)?=["'{][^"'{]*$/.test(linePrefix);
 
         if (!isClassName) {
-          console.log('ClassName not found');
+          console.log("ClassName not found");
           return undefined;
         }
 
-        return Array.from(classDefinitions.entries()).map(([className, properties]) => {
-          const completionItem = new vscode.CompletionItem(
-            className,
-            vscode.CompletionItemKind.Value
-          );
+        return Array.from(classDefinitions.entries()).map(
+          ([className, properties]) => {
+            const completionItem = new vscode.CompletionItem(
+              className,
+              vscode.CompletionItemKind.Value
+            );
 
-          // Create detailed documentation with CSS properties
-          const documentation = new vscode.MarkdownString();
-          documentation.appendCodeblock(properties, 'css');
+            // Create detailed documentation with CSS properties
+            const documentation = new vscode.MarkdownString();
+            documentation.appendCodeblock(properties, "css");
 
-          completionItem.documentation = documentation;
-          completionItem.detail = `${className} - Mint CSS class`;
+            completionItem.documentation = documentation;
+            completionItem.detail = `${className} - Mint CSS class`;
 
-          // Determine if we're in a JSX/TSX file
-          const isJSX = document.languageId.includes("react");
-          const isInQuotes =
-            linePrefix.endsWith('"') ||
-            linePrefix.endsWith("'") ||
-            linePrefix.endsWith("{");
+            // Determine if we're in a JSX/TSX file
+            const isInQuotes =
+              linePrefix.endsWith('"') ||
+              linePrefix.endsWith("'") ||
+              linePrefix.endsWith("{");
 
-          if (isJSX && !isInQuotes) {
-            completionItem.insertText = className;
-          } else {
-            completionItem.insertText = className;
+            if (isJSX && !isInQuotes) {
+              completionItem.insertText = className;
+            } else {
+              completionItem.insertText = className;
+            }
+
+            return completionItem;
           }
-
-          return completionItem;
-        });
+        );
       },
     },
     '"', // Trigger completion when typing inside quotes
     "'", // Also trigger for single quotes
-    "{"  // And for JSX expressions
+    "{" // And for JSX expressions
   );
 
   context.subscriptions.push(provider);
 
   // Register command to set package
-  const setPackageCommand = vscode.commands.registerCommand('css-suggestor.setPackage', async () => {
-    const packageName = await vscode.window.showInputBox({
-      prompt: 'Enter the NPM package name to load CSS classes from',
-      value: currentPackage
-    });
+  const setPackageCommand = vscode.commands.registerCommand(
+    "css-suggestor.setPackage",
+    async () => {
+      const packageName = await vscode.window.showInputBox({
+        prompt: "Enter the NPM package name to load CSS classes from",
+        value: currentPackage,
+      });
 
-    if (packageName) {
-      currentPackage = packageName;
-      await loadCSSClasses(currentPackage);
+      if (packageName) {
+        currentPackage = packageName;
+        await loadCSSClasses(currentPackage);
+      }
     }
-  });
+  );
 
   context.subscriptions.push(setPackageCommand);
 }
