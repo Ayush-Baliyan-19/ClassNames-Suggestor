@@ -76,16 +76,18 @@ async function activate(context) {
     const definitions = new Map();
     const classRegex = /\.([a-zA-Z0-9_-]+)\s*\{([^}]*)\}/g;
     let match;
-
+  
     while ((match = classRegex.exec(cssContent)) !== null) {
       const className = match[1];
-      const properties = match[2].trim();
-
+      let properties = match[2].trim();
+  
       if (className && properties) {
+        // Add line breaks after each semicolon
+        properties = properties.replace(/;/g, ';\n');
         definitions.set(className, properties);
       }
     }
-
+  
     return definitions;
   }
 
