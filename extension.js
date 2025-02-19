@@ -154,7 +154,7 @@ async function activate(context) {
               linePrefix.endsWith("'") ||
               linePrefix.endsWith("{");
 
-            if (isJSX && !isInQuotes) {
+            if (!isInQuotes) {
               completionItem.insertText = className;
             } else {
               completionItem.insertText = className;

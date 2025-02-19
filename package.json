@@ -2,7 +2,7 @@
   "name": "css-suggestor",
   "displayName": "Css-Suggestor",
   "description": "Suggests CSS classes from npm packages",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "publisher": "AyushBaliyan",
   "engines": {
     "vscode": "^1.54.0"
@@ -27,105 +27,13 @@
         "title": "CSS Suggestor: Set NPM Package"
       }
     ],
-    "languages": [
-      {
-        "id": "html",
-        "extensions": [
-          ".html"
-        ],
-        "aliases": [
-          "HTML",
-          "htm",
-          "html"
-        ]
-      },
-      {
-        "id": "javascript",
-        "extensions": [
-          ".js"
-        ],
-        "aliases": [
-          "JavaScript",
-          "javascript",
-          "js"
-        ]
-      },
-      {
-        "id": "typescript",
-        "extensions": [
-          ".ts"
-        ],
-        "aliases": [
-          "TypeScript",
-          "typescript",
-          "ts"
-        ]
-      },
-      {
-        "id": "javascriptreact",
-        "extensions": [
-          ".jsx"
-        ],
-        "aliases": [
-          "JavaScript React",
-          "javascriptreact",
-          "jsx"
-        ]
-      },
-      {
-        "id": "typescriptreact",
-        "extensions": [
-          ".tsx"
-        ],
-        "aliases": [
-          "TypeScript React",
-          "typescriptreact",
-          "typescriptjsx",
-          "tsx"
-        ]
-      }
-    ],
-    "configurationDefaults": {
-      "[html]": {
-        "editor.quickSuggestions": {
-          "other": true,
-          "comments": true,
-          "strings": true
-        }
-      },
-      "[javascript]": {
-        "editor.quickSuggestions": {
-          "other": true,
-          "comments": true,
-          "strings": true
-        }
-      },
-      "[typescript]": {
-        "editor.quickSuggestions": {
-          "other": true,
-          "comments": true,
-          "strings": true
-        }
-      },
-      "[javascriptreact]": {
-        "editor.quickSuggestions": {
-          "other": true,
-          "comments": true,
-          "strings": true
-        }
-      },
-      "[typescriptreact]": {
-        "editor.quickSuggestions": {
-          "other": true,
-          "comments": true,
-          "strings": true
-        }
-      },
-      "[typescriptjsx]": {
-        "editor.quickSuggestions": {
-          "other": true,
-          "comments": true,
-          "strings": true
+    "configuration": {
+      "title": "CSS Suggestor",
+      "properties": {
+        "cssSuggestor.enableQuickSuggestions": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable/disable quick suggestions for CSS classes"
         }
       }
     }
