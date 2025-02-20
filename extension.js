@@ -167,7 +167,8 @@ async function activate(context) {
     },
     '"', // Trigger completion when typing inside quotes
     "'", // Also trigger for single quotes
-    "{" // And for JSX expressions
+    "{", // And for JSX expressions
+    " "
   );
 
   context.subscriptions.push(provider);

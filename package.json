@@ -2,7 +2,7 @@
   "name": "css-suggestor",
   "displayName": "Css-Suggestor",
   "description": "Suggests CSS classes from npm packages",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "publisher": "AyushBaliyan",
   "engines": {
     "vscode": "^1.54.0"
@@ -16,9 +16,9 @@
     "onLanguage:typescript",
     "onLanguage:javascriptreact",
     "onLanguage:typescriptreact",
-    "onLanguage:typescriptjsx",
-    "onCommand:css-suggestor.setPackage"
+    "onLanguage:typescriptjsx"
   ],
+  "icon": "images/CssSuggestor.png",
   "main": "./extension.js",
   "contributes": {
     "commands": [
